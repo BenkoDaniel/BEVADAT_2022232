@@ -9,7 +9,7 @@ import numpy as np
 #return type: list
 #függvény neve legyen: subset
 
-def subset(input_list=[1,2,3,4,5], start=1, end=4):
+def subset(input_list, start, end):
     return input_list[start:end]
 
 
@@ -21,7 +21,7 @@ def subset(input_list=[1,2,3,4,5], start=1, end=4):
 #return type: list
 #függvény neve legyen: every_nth
 
-def every_tnh(input_list=[1,2,3,4,5,6,7,8,9], n=3):
+def every_tnh(input_list, n=3):
     return input_list[::n]
 
 
@@ -32,7 +32,7 @@ def every_tnh(input_list=[1,2,3,4,5,6,7,8,9], n=3):
 #return type: bool
 #függvény neve legyen: unique
 
-def unique(input_list=[1,2,3,4,5,6,7,8,9]):
+def unique(input_list):
     return len(set(input_list)) == len(input_list)
 
 #Készíts egy függvényt ami paraméterként egy 2 dimenziós listát vár és ezt a listát kitudja "lapítani"
@@ -43,7 +43,7 @@ def unique(input_list=[1,2,3,4,5,6,7,8,9]):
 #return type: list
 #függvény neve legyen: flatten
 
-def flatten(input_list=[[1,2],[3,4],[5,6]]):
+def flatten(input_list):
     return [item for sublist in input_list for item in sublist]
 
 #Készíts egy függvényt ami paraméterként n darab listát vár, és összfűzi ezeket a listákat.
@@ -68,7 +68,7 @@ def merge_lists(*args):
 #return type: list
 #függvény neve legyen: reverse_tuples
 
-def reverse_tuples(input_list=[(1,2),(3,4),(5,6)]):
+def reverse_tuples(input_list):
     return reversed(input_list)
 
 #Készíts egy függvényt ami paraméterként egy listát vár, és eltávolítja az ismétlődéseket a listából.
@@ -78,7 +78,7 @@ def reverse_tuples(input_list=[(1,2),(3,4),(5,6)]):
 #return type: list
 #függvény neve legyen: remove_duplicates
 
-def remove_duplicates(input_list=[1,2,3,3,4,5]):
+def remove_duplicates(input_list):
     return list(dict.fromkeys(input_list))
 
 #Készíts egy olyan függvényt ami paraméterként egy 2 dimenziós mátrixot vár és visszater a mátrix transzponáltjával.
@@ -92,7 +92,7 @@ def remove_duplicates(input_list=[1,2,3,3,4,5]):
 #return type: list
 #függvény neve legyen: transpose
 
-def transpose(input_matrix=[[1,2,3],[4,5,6],[7,8,9]]):
+def transpose(input_matrix):
     return np.transpose(input_matrix)
 
 
@@ -104,7 +104,7 @@ def transpose(input_matrix=[[1,2,3],[4,5,6],[7,8,9]]):
 #return type: list
 #függvény neve legyen: split_into_chunks
 
-def split_into_chunks(input_list=[1,2,3,4,5,6,7,8,9], chunk_size=3):
+def split_into_chunks(input_list, chunk_size):
     return [input_list[i:i+chunk_size] for i in range(0, len(input_list), chunk_size)]
 
 #Készíts egy függvényt ami paraméterként n darab dictionary-t vár és visszatér egy darab dictionary-vel.
@@ -126,7 +126,7 @@ def merge_dicts(*args):
 #return type: dict
 #függvény neve legyen: by_parity
 
-def by_parity(input_list=[1,2,3,4,5,6,7,8,9]):
+def by_parity(input_list):
     output_dict = {"even":[], "odd":[]}
     for each in input_list:
         if each % 2 == 0:
@@ -141,5 +141,5 @@ def by_parity(input_list=[1,2,3,4,5,6,7,8,9]):
 #return type: dict
 #függvény neve legyen: mean_key_value
 
-def mean_key_value(input_dict={"some_key":[1,2,3], "another_key":[1,2,3,4]}):
+def mean_key_value(input_dict):
     return sum(input_dict.values()) / len(input_dict)
