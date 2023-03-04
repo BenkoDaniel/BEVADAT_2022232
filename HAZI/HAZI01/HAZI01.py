@@ -9,6 +9,7 @@ import numpy as np
 #return type: list
 #függvény neve legyen: subset
 
+
 def subset(input_list, start, end):
     return input_list[start:end]
 
@@ -43,6 +44,7 @@ def unique(input_list):
 #return type: list
 #függvény neve legyen: flatten
 
+
 def flatten(input_list):
     return [item for sublist in input_list for item in sublist]
 
@@ -54,6 +56,7 @@ def flatten(input_list):
 #Egy példa a kimenetre: [1,2,3,4,5,6,7,8,9]
 #return type: list
 #függvény neve legyen: merge_lists
+
 
 def merge_lists(*args):
     output_list = []
@@ -68,6 +71,7 @@ def merge_lists(*args):
 #return type: list
 #függvény neve legyen: reverse_tuples
 
+
 def reverse_tuples(input_list):
     return reversed(input_list)
 
@@ -77,6 +81,7 @@ def reverse_tuples(input_list):
 #Egy példa a kimenetre: [1,2,3,4,5]
 #return type: list
 #függvény neve legyen: remove_duplicates
+
 
 def remove_duplicates(input_list):
     return list(dict.fromkeys(input_list))
@@ -92,6 +97,7 @@ def remove_duplicates(input_list):
 #return type: list
 #függvény neve legyen: transpose
 
+
 def transpose(input_matrix):
     return np.transpose(input_matrix)
 
@@ -104,6 +110,7 @@ def transpose(input_matrix):
 #return type: list
 #függvény neve legyen: split_into_chunks
 
+
 def split_into_chunks(input_list, chunk_size):
     return [input_list[i:i+chunk_size] for i in range(0, len(input_list), chunk_size)]
 
@@ -113,6 +120,7 @@ def split_into_chunks(input_list, chunk_size):
 #Egy példa a kimenetre: {"one":1,"two":2,"four":4,"three":3}
 #HINT: használj *args-ot
 #függvény neve legyen: merge_dicts
+
 
 def merge_dicts(*args):
     output_dict = {}
@@ -125,6 +133,7 @@ def merge_dicts(*args):
 #Egy példa a kimenetre: {"even":[2,4,6],"odd":[1,3,5]}
 #return type: dict
 #függvény neve legyen: by_parity
+
 
 def by_parity(input_list):
     output_dict = {"even":[], "odd":[]}
@@ -140,6 +149,7 @@ def by_parity(input_list):
 #Egy példa a kimenetre: {"some_key":2.5,"another_key":2.5}
 #return type: dict
 #függvény neve legyen: mean_key_value
+
 
 def mean_key_value(input_dict):
     return sum(input_dict.values()) / len(input_dict)
