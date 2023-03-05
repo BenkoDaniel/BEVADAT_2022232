@@ -44,6 +44,7 @@ def element_wise_sum(input_list_1, input_list_2):
         output_list.append(input_list_1[i] + input_list_2[i])
     return output_list
 
+
 #Készíts egy függvényt ami paraméterként egy dictionary-t vár és egy listával tér vissza
 #amiben a kulcs:érték párok egy Tuple-ben vannak.
 #Egy példa a bemenetere: {"egy":1,"ketto":2,"harom":3}

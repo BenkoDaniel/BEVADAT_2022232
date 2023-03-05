@@ -99,7 +99,11 @@ def remove_duplicates(input_list):
 
 
 def transpose(input_matrix):
-    return np.transpose(input_matrix)
+    output_matrix = []
+    for i in range(len(input_matrix[0])):
+        for j in range(len(input_matrix[1])):
+            output_matrix.append(input_matrix[j][i])
+    return output_matrix
 
 
 #Készíts egy függvényt ami paraméterként egy listát vár és visszatér a lista csoportosított változatával.
