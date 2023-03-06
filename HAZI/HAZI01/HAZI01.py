@@ -1,4 +1,4 @@
-import numpy as np
+
 
 #Készíts egy függvényt ami paraméterként egy listát vár és visszatér ennek a listának egy rész listájával.
 #Paraméterként lehessen megadni, hogy mettől-meddig akarjuk visszakapni a listát.
@@ -22,7 +22,7 @@ def subset(input_list, start, end):
 #return type: list
 #függvény neve legyen: every_nth
 
-def every_tnh(input_list, n=3):
+def every_nth(input_list, n):
     return input_list[::n]
 
 
@@ -73,7 +73,7 @@ def merge_lists(*args):
 
 
 def reverse_tuples(input_list):
-    return reversed(input_list)
+    return list(reversed(input_list))
 
 #Készíts egy függvényt ami paraméterként egy listát vár, és eltávolítja az ismétlődéseket a listából.
 #Egy olyan listával térjen vissza amiben csak a bemeneti lista egyedi értékei vannak benne.
@@ -100,7 +100,7 @@ def remove_duplicates(input_list):
 
 def transpose(input_matrix):
     output_matrix = []
-    for i in range(len(input_matrix[0])):
+    for i in range(len(input_matrix)):
         for j in range(len(input_matrix[1])):
             output_matrix.append(input_matrix[j][i])
     return output_matrix
@@ -143,9 +143,9 @@ def by_parity(input_list):
     output_dict = {"even":[], "odd":[]}
     for each in input_list:
         if each % 2 == 0:
-            output_dict[0].update([each])
+            output_dict["even"].append([each])
         else:
-            output_dict[1].update([each])
+            output_dict["odd"].append([each])
     return output_dict
 
 #Készíts egy függvényt ami paraméterként egy dict-et vár és visszatér egy dict-el amiben az egyes kulcsokhoz tartozó értékek átlaga van.
@@ -156,4 +156,9 @@ def by_parity(input_list):
 
 
 def mean_key_value(input_dict):
+    output_dict = {}
+    for key in input_dict:
+        output_dict[key] = input_dict[key]
+        output_dict[key].update(sum(input_dict[key].values()) / len(input_dict))
+
     return sum(input_dict.values()) / len(input_dict)
