@@ -8,8 +8,8 @@
 
 
 
-def contains_odd(input_list):
-    for i in range(len(input_list)):
+def contains_odd(input_list1):
+    for i in range(len(input_list1)):
         if i % 2 == 1:
             return True
     return False
