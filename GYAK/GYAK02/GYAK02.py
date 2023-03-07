@@ -33,6 +33,7 @@ def set_one(input_array):
 def do_transpose(input_matrix):
     return np.transpose(input_matrix)
 
+
 # Készíts egy olyan függvényt ami az array-ben lévő értékeket N tizenedjegyik kerekíti, alapértelmezetten
 # Be: [0.1223, 0.1675], n = 2
 # Ki: [0.12, 0.17]
@@ -49,7 +50,7 @@ def round_array(input_array, n=2):
 # bool_array()
 
 def bool_array(input_array):
-    return np.astype(input_array, dtype=bool)
+    return input_array.astype(np.bool_)
 
 
 # Készíts egy olyan függvényt, ami a bementként  0 és 1 ből álló tömben a 1 - False-ra az 0 True-ra cserélni
@@ -59,7 +60,7 @@ def bool_array(input_array):
 
 
 def invert_bool_array(input_array):
-    return np.invert(np.astype(input_array, dtype=bool))
+    return np.invert(input_array.astype(np.bool_))
 
 
 # Készíts egy olyan függvényt ami a paraméterként kapott array-t kilapítja
@@ -70,3 +71,4 @@ def invert_bool_array(input_array):
 
 def flatten(input_array):
     return input_array.reshape(-1)
+
