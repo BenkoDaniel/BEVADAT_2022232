@@ -7,7 +7,9 @@ import numpy as np
 # column_swap()
 
 def column_swap(input_array):
-    return input_array[:, [1, 0]]
+    return input_array[len(input_array):0:-1]
+#print(column_swap(np.array([[1,2],[3,4]])))
+
 
 #Készíts egy olyan függvényt ami összehasonlít két array-t és adjon vissza egy array-ben, hogy hol egyenlőek
 # Pl Be: [7,8,9], [9,8,7]
@@ -26,7 +28,10 @@ def compare_two_array(input_array1, input_array2):
 # 3D-vel még műküdnie kell!
 
 def get_array_shape(input_array):
-    return np.shape(input_array)
+    if (len(np.shape(input_array)) == 2):
+        return "sor: " + str(np.shape(input_array)[0]) + ", oszlop: " + str(np.shape(input_array)[1]) + ", melyseg: " + str(1)
+    else:
+        return "sor: " + str(np.shape(input_array)[0]) + ", oszlop: " + str(np.shape(input_array)[1]) + ", melyseg: " + str(np.shape(input_array)[2])
 
 
 
@@ -43,7 +48,7 @@ def encode_Y(input_array, classes):
     return output_array
 
 
-print(encode_Y(np.array([1, 2, 0, 3]), 4))
+#print(encode_Y(np.array([1, 2, 0, 3]), 4))
 
 
 
@@ -54,9 +59,7 @@ print(encode_Y(np.array([1, 2, 0, 3]), 4))
 
 def decode_Y(input_array):
     return np.resize(input_array, len(input_array))
-
-
-print(decode_Y(np.array([[0,1,0,0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1]])))
+#print(decode_Y(np.array([[0,1,0,0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1]])))
 
 
 # Készíts egy olyan függvényt, ami képes kiértékelni egy neurális háló eredményét! Bemenetként egy listát és egy array-t és adja vissza a legvalószínübb element a listából.
@@ -78,15 +81,36 @@ def replace_odd_numbers(input_array):
     input_array[odds] = -1
     return input_array
 
-# Készíts egy olyan függvényt, ami egy array értékeit -1 és 1-re változtatja, attól függően, hogy az adott elem nagyobb vagy kisebb a paraméterként megadott számnál.
+# Készíts egy olyan függvényt, ami egy array értékeit -1 és 1-re változtatja,
+# attól függően, hogy az adott elem nagyobb vagy kisebb a paraméterként megadott számnál.
 # Ha a szám kisebb mint a megadott érték, akkor -1, ha nagyobb vagy egyenlő, akkor pedig 1.
 # Be: [1, 2, 5, 0], 2
 # Ki: [-1, 1, 1, -1]
 # replace_by_value()
+
+def replace_by_value(input_array, value):
+    smaller = np.where(input_array < value)
+    bigger = np.where(input_array >= value)
+    input_array[smaller] = -1
+    input_array[bigger] = 1
+    return input_array
+
+
+#print(replace_by_value(np.array([1, 2, 5, 0]), 2))
+
 # Készítsd egy olyan függvényt, ami az array értékeit összeszorozza és az eredmény visszaadja
 # Be: [1,2,3,4]
 # Ki: 24
 # array_multi()
+
+def array_multi(input_array):
+    result = 1
+    for x in input_array:
+        result = result * x
+    return result
+
+#print(array_multi(np.array([1,2,3,4])))
+
 
 
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
