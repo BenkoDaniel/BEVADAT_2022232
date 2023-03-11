@@ -96,8 +96,6 @@ def replace_by_value(input_array, value):
     return input_array
 
 
-#print(replace_by_value(np.array([1, 2, 5, 0]), 2))
-
 # Készítsd egy olyan függvényt, ami az array értékeit összeszorozza és az eredmény visszaadja
 # Be: [1,2,3,4]
 # Ki: 24
@@ -109,9 +107,6 @@ def array_multi(input_array):
         result = result * x
     return result
 
-#print(array_multi(np.array([1,2,3,4])))
-
-
 
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
 # Készítsd egy olyan függvényt, ami a 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
@@ -119,11 +114,25 @@ def array_multi(input_array):
 # Ki: [2, 12]
 # array_multi_2d()
 
+def array_multi_2d(input_array):
+    endofrow = input_array.shape()[0]
+    x=0
+    for row in input_array:
+        input_array[x]= array_multi(input_array[row:endofrow])
+        x = x+ endofrow
+    return np.transpose(input_array)[0:endofrow]
 
-# Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal. Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
+#print(array_multi_2d(np.array([[1, 2], [3, 4]])))
+
+
+# Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal.
+# Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
 # Be: [[1,2],[3,4]]
 # Ki: [[0,0,0,0],[0,1,2,0],[0,3,4,0],[0,0,0,0]]
 # add_border()
+
+def add_border(input_array):
+    return np.pad(input_array, pad_width=1, mode='constant' ,constant_values=0)
 
 
 # Készíts egy olyan függvényt ami két dátum között felsorolja az összes napot.
@@ -131,11 +140,23 @@ def array_multi(input_array):
 # Ki: ['2023-03-01', '2023-03-02', .. , '2023-03-31',]
 # list_days()
 
+def list_days(date1, date2):
+    return np.arange(date1, date2, dtype='datetime64[D]')
+
 
 # Írj egy fügvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD
 # Be:
 # Ki: 2017-03-24
+
+def get_act_date():
+    return np.datetime64('today')
+
 # Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:00:00 óta.
 # Be:
 # Ki: másodpercben az idó, int-é kasztolva
 # sec_from_1970()
+
+def sec_from_1970():
+    return int(float(str(np.datetime64('now') - np.datetime64('1970-01-01 00:00:00'))))
+
+print(sec_from_1970())
