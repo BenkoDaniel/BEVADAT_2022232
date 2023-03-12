@@ -8,8 +8,8 @@ import time
 # column_swap()
 
 def column_swap(input_array):
-    return input_array[len(input_array):0:-1]
-#print(column_swap(np.array([[1,2],[3,4]])))
+    return input_array[:,::-1]
+print(column_swap(np.array([[1,2],[3,4]])))
 
 #2.
 #Készíts egy olyan függvényt ami összehasonlít két array-t és adjon vissza egy array-ben, hogy hol egyenlőek
