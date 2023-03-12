@@ -1,5 +1,4 @@
 import numpy as np
-import time
 
 #1.
 # Írj egy olyan fügvényt, ami megfordítja egy 2d array oszlopait
@@ -7,9 +6,9 @@ import time
 # Ki: [[2,1],[4,3]]
 # column_swap()
 
-def column_swap(input_array):
+def column_swap(input_array: np.array) -> np.array:
     return input_array[:,::-1]
-print(column_swap(np.array([[1,2],[3,4]])))
+
 
 #2.
 #Készíts egy olyan függvényt ami összehasonlít két array-t és adjon vissza egy array-ben, hogy hol egyenlőek
@@ -29,11 +28,13 @@ def compare_two_array(input_array1, input_array2):
 # 3D-vel még műküdnie kell!
 
 def get_array_shape(input_array):
-    if (len(np.shape(input_array)) == 2):
-        return "sor: " + str(np.shape(input_array)[0]) + ", oszlop: " + str(np.shape(input_array)[1]) + ", melyseg: " + str(1)
+    sh = np.shape(input_array)
+    if (len(shape) == 1):
+        return f"sor: 1, oszlop: {shape[0]}, melyseg: 0"
+    elif (len(np.shape(input_array)) == 2):
+        return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: 1"
     else:
-        return "sor: " + str(np.shape(input_array)[0]) + ", oszlop: " + str(np.shape(input_array)[1]) + ", melyseg: " + str(np.shape(input_array)[2])
-
+        return f"sor: {shape[0]}, oszlop: {shape[1]}, melyseg: {shape[2]}"
 
 #4.
 # Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges Y-okat egy numpy array-ből.
@@ -44,12 +45,8 @@ def get_array_shape(input_array):
 # encode_Y()
 
 def encode_Y(input_array, classes):
-    output_array = np.resize(input_array, (classes, 4))
-
+    output_array = np.eye(classes)[input_array].astype(int)
     return output_array
-
-
-#print(encode_Y(np.array([1, 2, 0, 3]), 4))
 
 
 #5.
@@ -59,8 +56,7 @@ def encode_Y(input_array, classes):
 # decode_Y()
 
 def decode_Y(input_array):
-    return np.resize(input_array, len(input_array))
-#print(decode_Y(np.array([[0,1,0,0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1]])))
+    return np.argmax(input_array,axis=1)
 
 #6.
 # Készíts egy olyan függvényt, ami képes kiértékelni egy neurális háló eredményét! Bemenetként egy listát és egy array-t és adja vissza a legvalószínübb element a listából.
@@ -104,10 +100,7 @@ def replace_by_value(input_array, value):
 # array_multi()
 
 def array_multi(input_array):
-    result = 1
-    for x in input_array:
-        result = result * x
-    return result
+    return np.prod(input_array)
 
 #10.
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
@@ -117,14 +110,9 @@ def array_multi(input_array):
 # array_multi_2d()
 
 def array_multi_2d(input_array):
-    endofrow = input_array.shape()[0]
-    x=0
-    for row in input_array:
-        input_array[x]= array_multi(input_array[row:endofrow])
-        x = x+ endofrow
-    return np.transpose(input_array)[0:endofrow]
+    output_array = np.apply_along_axis(np.prod, axis=1, arr=input_array)
+    return output_array
 
-#print(array_multi_2d(np.array([[1, 2], [3, 4]])))
 
 #11.
 # Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal.
@@ -154,11 +142,11 @@ def get_act_date():
     return np.datetime64('today')
 
 #14.
-# Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:00:00 óta.
+# Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:02:00 óta.
 # Be:
 # Ki: másodpercben az idó, int-é kasztolva
 # sec_from_1970()
 
 def sec_from_1970():
-    return int(time.time())
+    return int((np.datetime64('now') - np.datetime64('1970-01-01 00:02:00')) / np.timedelta64(1, 's'))
 
