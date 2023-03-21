@@ -109,8 +109,8 @@ def plot_population(test_df) -> matplotlib.figure.Figure:
        plt.title("Population of Countries")
        return fig
 
-plot_population(df)
-plt.show()
+#plot_population(df)
+#plt.show()
 
 '''
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan kördiagramot,
