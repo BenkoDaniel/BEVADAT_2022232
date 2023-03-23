@@ -65,7 +65,7 @@ def get_top_two(test_df) -> pandas.core.frame.DataFrame:
        new_df = test_df.copy().sort_values('area')
        return new_df.loc[0:1]
 
-print(get_top_two(df))
+#print(get_top_two(df))
 
 '''
 Készíts egy függvényt ami a bemeneti DataFrame-ből kiszámolja az országok népsűrűségét és eltárolja az eredményt egy új oszlopba ('density').
