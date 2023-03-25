@@ -252,5 +252,5 @@ def ethnicity_pie_chart(test_df) -> matplotlib.figure.Figure:
     return fig
 
 
-plot = ethnicity_pie_chart(df)
-plt.show()
+#plot = ethnicity_pie_chart(df)
+#plt.show()
