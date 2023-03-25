@@ -190,6 +190,7 @@ függvény neve: math_bar_plot
 
 
 
+
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan histogramot,
 ami vizualizálja az elért írásbeli pontszámokat.
