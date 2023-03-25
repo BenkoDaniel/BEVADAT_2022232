@@ -62,8 +62,8 @@ függvény neve: get_top_two
 
 
 def get_top_two(test_df) -> pandas.core.frame.DataFrame:
-       new_df = test_df.copy().sort_values('area')
-       return new_df.loc[0:1]
+       new_df = test_df.copy().sort_values('area', ascending=False)
+       return new_df.loc[:2]
 
 #print(get_top_two(df))
 
@@ -102,11 +102,11 @@ függvény neve: plot_population
 
 def plot_population(test_df) -> matplotlib.figure.Figure:
        new_df = test_df.copy()
-       fig = plt.plot()
-       plt.bar(new_df['country'], new_df['population'])
-       plt.xlabel("Country")
-       plt.ylabel("Population (millions)")
-       plt.title("Population of Countries")
+       fig, ax = plt.subplots()
+       ax.bar(new_df['country'], new_df['population'])
+       ax.xlabel("Country")
+       ax.title("Population of Countries")
+       ax.ylabel("Population (millions)")
        return fig
 
 #plot_population(df)
@@ -127,9 +127,9 @@ függvény neve: plot_area
 
 def plot_area(test_df) -> matplotlib.figure.Figure:
        new_df = test_df.copy()
-       fig = plt.figure()
-       plt.pie(new_df['area'], labels=new_df['country'])
-       plt.title("Area of Countries")
+       fig , ax= plt.figure()
+       ax.pie(new_df['area'], labels=new_df['country'])
+       ax.title("Area of Countries")
        return fig
 
 #plot_area(df)
