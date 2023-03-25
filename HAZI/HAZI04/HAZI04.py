@@ -1,3 +1,5 @@
+import random
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -61,7 +63,7 @@ függvény neve: math_passed_count
 def math_passed_count(test_df) -> int:
     return test_df[test_df['math score'] > 49]
 
-print(math_passed_count(df))
+#print(math_passed_count(df))
 
 
 
@@ -90,10 +92,11 @@ return type: pandas.core.frame.DataFrame
 függvény neve: average_scores
 '''
 
-#def average_scores() -> pandas.core.frame.DataFrame:
+def average_scores(test_df) -> pandas.core.frame.DataFrame:
+    new_df = test_df.groupby('parental level of education')[['math score', 'reading score', 'writing score']].mean()
+    return new_df
 
-
-
+#print(average_scores(df))
 
 '''
 Készíts egy függvényt, ami a bementeti Dataframet kiegészíti egy 'age' oszloppal, töltsük fel random 18-66 év közötti értékekkel.
@@ -104,6 +107,15 @@ Egy példa a kimenetre: df_data_with_age
 return type: pandas.core.frame.DataFrame
 függvény neve: add_age
 '''
+
+def add_age(test_df) -> pandas.core.frame.DataFrame:
+    new_df = test_df.copy()
+    random.seed(42)
+    new_df['Age'] = np.random.randint(low=18, high=66, size=len(test_df))
+    return new_df
+
+#print(add_age(df))
+
 
 
 '''
@@ -116,6 +128,13 @@ függvény neve: female_top_score
 '''
 
 
+def female_top_score(test_df) -> tuple:
+    new_df = test_df.copy()
+    f = new_df[new_df['gender'] == 'female']
+    top = f.loc[(f[['math score', 'reading score', 'writing score']].sum(axis=1)).idxmax()]
+    return (top['math score'], top['reading score'], top['writing score'])
+
+#print(female_top_score(df))
 
 '''
 Készíts egy függvényt, ami a bementeti Dataframet kiegészíti egy 'grade' oszloppal. 
@@ -133,6 +152,27 @@ return type: pandas.core.frame.DataFrame
 függvény neve: add_grade
 '''
 
+def add_grade(test_df) -> pandas.core.frame.DataFrame:
+    new_df = test_df.copy()
+    def gradecalc(scores):
+        precent = scores / 300 * 100
+        if precent < 60:
+            return 'F'
+        elif precent < 70:
+            return 'D'
+        elif precent < 80:
+            return 'C'
+        elif precent < 90:
+            return 'B'
+        else:
+            return 'A'
+
+    new_df['grade'] = new_df[['math score', 'reading score', 'writing score']].sum(axis=1).apply(gradecalc)
+    return new_df
+
+#print(add_grade(df))
+
+
 
 '''
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan oszlop diagrammot,
@@ -147,6 +187,7 @@ Egy példa a kimenetre: fig
 return type: matplotlib.figure.Figure
 függvény neve: math_bar_plot
 '''
+
 
 
 ''' 
