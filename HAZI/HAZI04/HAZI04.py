@@ -1,5 +1,6 @@
 import random
 
+import matplotlib.figure
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -188,8 +189,18 @@ return type: matplotlib.figure.Figure
 függvény neve: math_bar_plot
 '''
 
+def math_bar_plot(test_df)->matplotlib.figure.Figure:
+    new_df = test_df.copy()
+    new_df = new_df.groupby('gender')['math score'].mean()
+    fig, ax = plt.subplots()
+    ax.bar(new_df.index, new_df.values)
+    ax.set_title('Average Math Score By Gender')
+    ax.set_xlabel('Gender')
+    ax.set_ylabel('Math Score')
+    return fig
 
-
+#plot = math_bar_plot(df)
+#plt.show()
 
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan histogramot,
@@ -205,6 +216,18 @@ return type: matplotlib.figure.Figure
 függvény neve: writing_hist
 '''
 
+def writing_hist(test_df) -> matplotlib.figure.Figure:
+    new_df = test_df.copy()
+    fig, ax = plt.subplots()
+    ax.hist(new_df['writing score'])
+    ax.set_title('Distribution of Writing Scores')
+    ax.set_xlabel('Writing Score')
+    ax.set_ylabel('Number of Students')
+    return fig
+
+#plot = writing_hist(df)
+#plt.show()
+
 
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan kördiagramot,
@@ -219,3 +242,15 @@ Egy példa a kimenetre: fig
 return type: matplotlib.figure.Figure
 függvény neve: ethnicity_pie_chart
 '''
+def ethnicity_pie_chart(test_df) -> matplotlib.figure.Figure:
+    new_df = test_df.copy()
+    shape = new_df.shape[0]
+    new_df = new_df.groupby(new_df['race/ethnicity'])['race/ethnicity'].count()
+    fig, ax = plt.subplots()
+    ax.pie(new_df.values/shape, labels=new_df.index, autopct='%1.1f%%')
+    ax.set_title('Proportion of Students by Race/Ethnicity')
+    return fig
+
+
+plot = ethnicity_pie_chart(df)
+plt.show()
