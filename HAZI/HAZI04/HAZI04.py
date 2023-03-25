@@ -25,7 +25,7 @@ függvény neve: csv_to_df
 def csv_to_df(path) -> pandas.core.frame.DataFrame:
     return pd.read_csv(path)
 
-df = csv_to_df("D:/Egyetem/4. felev/Bevadat/StudentsPerformance.csv")
+#df = csv_to_df("D:/Egyetem/4. felev/Bevadat/StudentsPerformance.csv")
 #print(df)
 
 '''
