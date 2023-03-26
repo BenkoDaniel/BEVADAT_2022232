@@ -43,9 +43,9 @@ def capitalize_columns(test_df) -> pandas.core.frame.DataFrame:
     colList = []
     for name in new_df_capitalized.columns:
         if 'e' in name:
-            colList.append(name.upper())
-        else:
             colList.append(name)
+        else:
+            colList.append(name.upper())
     new_df_capitalized.columns = colList
     return new_df_capitalized
 
@@ -62,7 +62,8 @@ függvény neve: math_passed_count
 '''
 
 def math_passed_count(test_df) -> int:
-    return test_df[test_df['math score'] > 49]
+    new_df = test_df.copy()
+    return len(new_df[new_df['math score'] > 49])
 
 #print(math_passed_count(df))
 
@@ -111,8 +112,8 @@ függvény neve: add_age
 
 def add_age(test_df) -> pandas.core.frame.DataFrame:
     new_df = test_df.copy()
-    random.seed(42)
-    new_df['Age'] = np.random.randint(low=18, high=66, size=len(test_df))
+    np.random.seed(42)
+    new_df['age'] = np.random.randint(low=18, high=66, size=len(test_df))
     return new_df
 
 #print(add_age(df))
