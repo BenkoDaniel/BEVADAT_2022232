@@ -63,7 +63,7 @@ függvény neve: get_top_two
 
 def get_top_two(test_df) -> pandas.core.frame.DataFrame:
        new_df = test_df.copy().sort_values('area', ascending=False)
-       return new_df.loc[:2]
+       return new_df[0:2]
 
 #print(get_top_two(df))
 
@@ -100,7 +100,7 @@ return type: matplotlib.figure.Figure
 függvény neve: plot_population
 '''
 
-def plot_population(test_df) -> matplotlib.figure.Figure:
+def plot_population(test_df: pd.core.frame.DataFrame) -> matplotlib.figure.Figure:
        new_df = test_df.copy()
        fig, ax = plt.subplots()
        ax.bar(new_df['country'], new_df['population'])
@@ -125,7 +125,7 @@ függvény neve: plot_area
 '''
 
 
-def plot_area(test_df) -> matplotlib.figure.Figure:
+def plot_area(test_df: pd.core.frame.DataFrame) -> matplotlib.figure.Figure:
        new_df = test_df.copy()
        fig , ax= plt.figure()
        ax.pie(new_df['area'], labels=new_df['country'])
