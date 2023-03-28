@@ -9,6 +9,7 @@ from scipy.stats import mode
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
+#property elnevezes: k_neighbors
 
 class KNNClasifier:
 
@@ -62,7 +63,7 @@ class KNNClasifier:
         true_positive = (y_test == y_preds).sum()
         return true_positive
 
-    def plot_confusion_matrix(y_test: np.ndarray, y_preds: np.ndarray):
+    def confusion_matrix(y_test: np.ndarray, y_preds: np.ndarray):
         conf_matrix = confusion_matrix(y_test, y_preds)
         sns.heatmap(conf_matrix, annot=True)
         return conf_matrix
