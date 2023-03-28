@@ -23,7 +23,6 @@ class KNNClassifier:
 
     def __init__(self, k:int, test_split_raio:float) -> None:
         self.k = k
-        self.k_neighbors = k
         self.test_split_ratio = test_split_raio
 
 
