@@ -71,3 +71,5 @@ class CNNClassifier:
             ac_list.append((i, round(CNNClassifier.accuracy(self), 2)))
         return max(ac_list)
 
+
+
