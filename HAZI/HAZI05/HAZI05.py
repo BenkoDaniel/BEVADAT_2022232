@@ -68,6 +68,6 @@ class CNNClassifier:
         ac_list = []
         for i in range(20):
             CNNClassifier(i, self.test_split_ratio)
-            ac_list.append((i, CNNClassifier.accuracy(self)))
-        return max(list)
+            ac_list.append((i, round(CNNClassifier.accuracy(self), 2)))
+        return max(ac_list)
 
