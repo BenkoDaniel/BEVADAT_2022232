@@ -3,7 +3,7 @@ import numpy as np
 from typing import Tuple
 
 
-class CNNClassifier:
+class KNNClassifier:
     x_train: pd.DataFrame
     x_test: pd.DataFrame
     y_train: pd.DataFrame
