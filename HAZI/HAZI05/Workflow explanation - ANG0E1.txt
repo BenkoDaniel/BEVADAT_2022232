@@ -1,0 +1,21 @@
+Workflow explanation - ANG0E1
+
+load_csv:
+A paraméterként kapott elérési útvonalról betölti a dataframe-et, majd összekeveri az adatokat, hogy a teszt és a tanuló adatbázisba is egyformán vegyes adatok kerülhessenek.
+
+train_test_split: 
+Kiszámolja a paraméterként kapott features dataframe és az osztály szintű test_split_ratio adattag segítségével, hogy mekkora lesz a teszt dataframe mérete, majd ennek segítségével kiszámolja a tanuló dataframe méretét. Ezek után a features és a labels dataframeket szétosztja a kiszámolt teszt és tanulás méreket arányában.
+
+euclidean:
+Kiszámolja a teszt dataframe egy eleme és a tanuló dataframe minden eleme közti euklidészi távolságot, majd ezt egy tömbben visszaadja.
+
+predict:
+Minden teszt elemre kiszámolja az euklidészi távolságot, és ezeket egy rendezett array-jé teszi, ami a távolságok mellett az y_train dataframe megfelelő elemét is tartalmazza a megfelelő távolságok mellett.
+Ezután a preds listába berakja a távolságok módusza mellett levő y_train értéket, ez lesz a predikció
+
+accuracy:
+Kiszámolja a sikeresen igaznak prediktált eseteket.
+
+best_k:
+Egy tuple listában tárolja minden k értékhez a hozzá tartozó accuracy értéket, eredményként ennek a listának a maximumát adja vissza.
+
