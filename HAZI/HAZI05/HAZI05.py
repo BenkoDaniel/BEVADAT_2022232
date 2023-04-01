@@ -67,8 +67,8 @@ class KNNClassifier:
     def best_k(self) -> Tuple:
         ac_list = []
         for i in range(20):
-            CNNClassifier(i, self.test_split_ratio)
-            ac_list.append((i, round(CNNClassifier.accuracy(self), 2)))
+            KNNClassifier(i, self.test_split_ratio)
+            ac_list.append(tuple((i, round(KNNClassifier.accuracy(self), 2))))
         return max(ac_list)
 
 

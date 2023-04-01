@@ -40,12 +40,8 @@ class KNNClassifier:
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
 
-        x_train, y_train = features[:train_size, :], labels[:train_size]
-        x_test, y_test = features[train_size:, :], labels[train_size:]
-        self.x_train = x_train
-        self.y_train = y_train
-        self.x_test = x_test
-        self.y_test = y_test
+        self.x_train, self.y_train = features[:train_size, :], labels[:train_size]
+        self.x_test, self.y_test = features[train_size:, :], labels[train_size:]
 
     def euclidean(self, element_of_x: np.ndarray) -> np.ndarray:
         return np.sqrt(np.sum((self.x_train - element_of_x) ** 2, axis=1))
