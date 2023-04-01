@@ -36,7 +36,7 @@ class KNNClassifier:
         return x, y
 
     def train_set_split(self, features: np.ndarray, labels: np.ndarray):
-        test_size = int(len(features)) * self.test_split_ratio
+        test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
 

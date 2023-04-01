@@ -24,15 +24,13 @@ class KNNClassifier:
 
     @staticmethod
     def load_csv(path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        pd.random.seed(42)
-
         dataset = pd.read_csv(path, delimiter=',')
-        pd.random.state(42)
-        x, y = dataset[:, :-1], dataset[:, -1]
+        shuffled = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
+        x, y = shuffled[:, :-1], shuffled[:, -1]
         return x, y
 
     def train_set_split(self, features: pd.DataFrame, labels: pd.DataFrame):
-        test_size = int(len(features)) * self.test_split_ratio
+        test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
 
@@ -53,7 +51,7 @@ class KNNClassifier:
             self.y_preds = pd.DataFrame(preds)
 
     def accuracy(self) -> float:
-        true_positive = (self.y_test == self.y_preds).sum()
+        true_positive = (self.y_test.reset_index(drop=True) == self.y_preds).sum()
         return true_positive
 
     def plot_confusion_matrix(self):
