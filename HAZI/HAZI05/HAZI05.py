@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from typing import Tuple
+from sklearn.metrics import confusion_matrix
 
 
 class KNNClassifier:
@@ -35,15 +36,11 @@ class KNNClassifier:
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
 
-        x_train, y_train = features[:train_size, :], labels[:train_size]
-        x_test, y_test = features[train_size:, :], labels[train_size:]
-        self.x_train = x_train
-        self.y_train = y_train
-        self.x_test = x_test
-        self.y_test = y_test
+        self.x_train, self.y_train = features[:train_size, :], labels[:train_size]
+        self.x_test, self.y_test = features[train_size:, :], labels[train_size:]
 
     def euclidean(self, element_of_x: pd.DataFrame) -> pd.DataFrame:
-        return pd.sqrt(pd.sum((self.x_train - element_of_x) ** 2, axis=1))
+        return pd.sum((self.x_train - element_of_x) ** 2, axis=1)**0.5
 
     def predict(self, x_test: pd.DataFrame):
         preds = []
@@ -51,7 +48,7 @@ class KNNClassifier:
             distances = self.euclidean(x_test_element)
             distances = pd.array(sorted(zip(distances, self.y_train)))
 
-            label_pred = pd.mode(distances[:self.k, 1], keepdims=False)
+            label_pred = distances[:self.k, 1].mode(keepdims=False)
             preds.append(label_pred)
             self.y_preds = pd.DataFrame(preds)
 
@@ -60,7 +57,7 @@ class KNNClassifier:
         return true_positive
 
     def plot_confusion_matrix(self):
-        conf_matrix = pd.confusion_matrix(self.y_test, self.y_preds)
+        conf_matrix = confusion_matrix(self.y_test, self.y_preds)
         # sns.heatmap(conf_matrix, annot=True)
         return np.ndarray(conf_matrix)
 
