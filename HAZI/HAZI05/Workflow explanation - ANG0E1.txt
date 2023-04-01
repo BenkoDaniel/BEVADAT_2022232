@@ -14,7 +14,7 @@ Minden teszt elemre kiszámolja az euklidészi távolságot, és ezeket egy rend
 Ezután a preds listába berakja a távolságok módusza mellett levő y_train értéket, ez lesz a predikció
 
 accuracy:
-Kiszámolja a sikeresen igaznak prediktált eseteket.
+Kiszámolja a sikeresen igaznak prediktált eseteket, majd ezt a teszt esetekkel elosztja, így adja meg a helyes predikciók arányát.
 
 best_k:
 Egy tuple listában tárolja minden k értékhez a hozzá tartozó accuracy értéket, eredményként ennek a listának a maximumát adja vissza.

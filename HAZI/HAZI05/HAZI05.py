@@ -24,9 +24,9 @@ class KNNClassifier:
 
     @staticmethod
     def load_csv(path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        dataset = pd.read_csv(path, delimiter=',')
+        dataset = pd.read_csv(path, delimiter=',', header=None)
         shuffled = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
-        x, y = shuffled[:, :-1], shuffled[:, -1]
+        x, y = shuffled.iloc[:, :-1], shuffled.iloc[:, -1]
         return x, y
 
     def train_set_split(self, features: pd.DataFrame, labels: pd.DataFrame):
@@ -34,21 +34,21 @@ class KNNClassifier:
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
 
-        self.x_train, self.y_train = features[:train_size, :], labels[:train_size]
-        self.x_test, self.y_test = features[train_size:, :], labels[train_size:]
+        self.x_train, self.y_train = features.iloc[:train_size, :], labels.iloc[:train_size]
+        self.x_test, self.y_test = features.iloc[train_size:, :], labels.iloc[train_size:]
 
-    def euclidean(self, element_of_x: pd.DataFrame) -> pd.DataFrame:
-        return pd.sum((self.x_train - element_of_x) ** 2, axis=1)**0.5
+    def euclidean(self, element_of_x: pd.Series) -> pd.Series:
+        return pd.Series(((self.x_train - element_of_x) ** 2).sum(axis=1)**0.5)
 
     def predict(self, x_test: pd.DataFrame):
         preds = []
         for x_test_element in x_test:
             distances = self.euclidean(x_test_element)
-            distances = pd.array(sorted(zip(distances, self.y_train)))
-
-            label_pred = distances[:self.k, 1].mode(keepdims=False)
+            distances = pd.DataFrame({'distance': distances, 'labels': self.y_train})
+            distances = distances.sort_values(by='distance').reset_index(drop=True)
+            label_pred = distances.iloc[:self.k, 1].mode(keepdims=False).values[0]
             preds.append(label_pred)
-            self.y_preds = pd.DataFrame(preds)
+        self.y_preds = pd.DataFrame(preds)
 
     def accuracy(self) -> float:
         true_positive = (self.y_test.reset_index(drop=True) == self.y_preds).sum()
@@ -66,4 +66,9 @@ class KNNClassifier:
         return max(ac_list)
 
 
+classifier = KNNClassifier(2, 0.15)
+features, labels = classifier.load_csv('iris.csv')
+classifier.train_set_split(features, labels)
+classifier.predict(classifier.x_test)
+print(classifier.best_k())
 
