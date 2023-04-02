@@ -65,10 +65,10 @@ class KNNClassifier:
             ac_list.append(tuple((i, round(KNNClassifier.accuracy(self), 2))))
         return max(ac_list)
 
-
+'''
 classifier = KNNClassifier(2, 0.15)
 features, labels = classifier.load_csv('iris.csv')
 classifier.train_set_split(features, labels)
 classifier.predict(classifier.x_test)
 print(classifier.best_k())
-
+'''
