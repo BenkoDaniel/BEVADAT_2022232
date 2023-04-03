@@ -48,7 +48,8 @@ class KNNClassifier:
             distances = distances.sort_values(by='distance').reset_index(drop=True)
             label_pred = distances.iloc[:self.k, 1].mode(keepdims=False).values[0]
             preds.append(label_pred)
-        self.y_preds = pd.DataFrame(preds)
+
+        self.y_preds = pd.Series(preds, dtype='int32').values
 
     def accuracy(self) -> float:
         true_positive = (self.y_test.reset_index(drop=True) == self.y_preds).sum()
