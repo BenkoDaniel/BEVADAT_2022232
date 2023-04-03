@@ -38,7 +38,7 @@ class KNNClassifier:
     def train_set_split(self, features: np.ndarray, labels: np.ndarray):
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
-        assert len(features) == test_size + train_size, "Size mismatch!"
+        assert (len(features) == test_size + train_size), "Size mismatch!"
 
         self.x_train, self.y_train = features[:train_size, :], labels[:train_size]
         self.x_test, self.y_test = features[train_size:, :], labels[train_size:]

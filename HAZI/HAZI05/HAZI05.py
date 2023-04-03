@@ -25,14 +25,14 @@ class KNNClassifier:
     @staticmethod
     def load_csv(path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
         dataset = pd.read_csv(path, delimiter=',', header=None)
-        shuffled = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
-        x, y = shuffled.iloc[:, :-1], shuffled.iloc[:, -1]
+        dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
+        x, y = dataset.iloc[:, :-1], dataset.iloc[:, -1]
         return x, y
 
     def train_set_split(self, features: pd.DataFrame, labels: pd.DataFrame):
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
-        assert len(features) == test_size + train_size, "Size mismatch!"
+        assert (len(features) == test_size + train_size), "Size mismatch!"
 
         self.x_train, self.y_train = features.iloc[:train_size, :], labels.iloc[:train_size]
         self.x_test, self.y_test = features.iloc[train_size:, :], labels.iloc[train_size:]
