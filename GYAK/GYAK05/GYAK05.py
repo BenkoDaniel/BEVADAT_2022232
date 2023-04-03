@@ -3,7 +3,7 @@ from typing import Tuple
 from scipy.stats import mode
 
 from sklearn.metrics import confusion_matrix
-#import seaborn as sns
+import seaborn as sns
 
 #property elnevezes: k_neighbors
 
@@ -58,13 +58,11 @@ class KNNClassifier:
 
     def accuracy(self) -> float:
         true_positive = (self.y_test == self.y_preds).sum()
-        return true_positive
+        return true_positive / len(self.y_test) * 100
 
     def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        #sns.heatmap(conf_matrix, annot=True)
-        return np.ndarray(conf_matrix)
-
+        sns.heatmap(conf_matrix, annot=True)
 
 
 
