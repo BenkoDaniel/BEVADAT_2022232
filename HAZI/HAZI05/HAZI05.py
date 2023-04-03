@@ -55,15 +55,15 @@ class KNNClassifier:
         true_positive = (self.y_test.reset_index(drop=True) == self.y_preds).sum()
         return true_positive
 
-    def plot_confusion_matrix(self):
+    def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
         return np.ndarray(conf_matrix)
 
     def best_k(self) -> Tuple:
         ac_list = []
         for i in range(1, 21):
-            KNNClassifier(i, self.test_split_ratio)
-            ac_list.append(tuple((i, round(KNNClassifier.accuracy(self), 2))))
+            tester = KNNClassifier(i, self.test_split_ratio)
+            ac_list.append(tuple((i, round(tester.accuracy(), 2))))
         return max(ac_list)
 
 '''
