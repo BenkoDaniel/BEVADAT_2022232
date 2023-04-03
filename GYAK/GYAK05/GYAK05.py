@@ -54,7 +54,7 @@ class KNNClassifier:
 
             label_pred = mode(distances[:self.k, 1], keepdims=False)
             preds.append(label_pred)
-            self.y_preds = np.array(preds, dtype=np.int32)
+        self.y_preds = np.array(preds, dtype=np.int32)
 
     def accuracy(self) -> float:
         true_positive = (self.y_test == self.y_preds).sum()
