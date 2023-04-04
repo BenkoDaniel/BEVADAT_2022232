@@ -42,28 +42,28 @@ class KNNClassifier:
 
     def predict(self, x_test: pd.DataFrame):
         preds = []
-        for x_test_element in x_test:
+        for index, x_test_element in x_test.iterrows():
             distances = self.euclidean(x_test_element)
             distances = pd.DataFrame({'distance': distances, 'labels': self.y_train})
             distances = distances.sort_values(by='distance').reset_index(drop=True)
-            label_pred = distances.iloc[:self.k, 1].mode(keepdims=False).values[0]
+            label_pred = distances.iloc[:self.k, 1].mode().values[0]
             preds.append(label_pred)
 
         self.y_preds = pd.Series(preds, dtype='int32').values
 
     def accuracy(self) -> float:
         true_positive = (self.y_test.reset_index(drop=True) == self.y_preds).sum()
-        return true_positive
+        return true_positive / self.y_test.shape[0] * 100
 
     def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        return np.ndarray(conf_matrix)
+        return conf_matrix
 
     def best_k(self) -> Tuple:
         ac_list = []
         for i in range(1, 21):
-            tester = KNNClassifier(i, self.test_split_ratio)
-            ac_list.append(tuple((i, round(tester.accuracy(), 2))))
+            self.k = i
+            ac_list.append(tuple((i, round(self.accuracy(), 2))))
         return max(ac_list)
 
 '''
