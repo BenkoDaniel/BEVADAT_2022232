@@ -47,13 +47,13 @@ class KNNClassifier:
         return np.sqrt(np.sum((self.x_train - element_of_x) ** 2, axis=1))
 
     def predict(self, x_test: np.ndarray):
-        preds = []
+        labels_pred = []
         for x_test_element in x_test:
             distances = self.euclidean(x_test_element)
             distances = np.array(sorted(zip(distances, self.y_train)))
-            label_pred = mode(distances[:self.k, 1], keepdims=False)
-            preds.append(label_pred)
-        self.y_preds = np.array(preds, dtype=np.int32)
+            label_pred = mode(distances[:self.k, 1], keepdims=False).mode
+            labels_pred.append(label_pred)
+        self.y_preds = np.array(labels_pred, dtype=np.int32)
 
     def accuracy(self) -> float:
         true_positive = (self.y_test == self.y_preds).sum()
@@ -61,8 +61,7 @@ class KNNClassifier:
 
     def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        #sns.heatmap(conf_matrix, annot=True)
-        return np.ndarray(conf_matrix)
+        return conf_matrix
 
 
 
