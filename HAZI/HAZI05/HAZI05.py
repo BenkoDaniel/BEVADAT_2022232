@@ -24,7 +24,7 @@ class KNNClassifier:
 
     @staticmethod
     def load_csv(path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        dataset = pd.read_csv(path, delimiter=',', header=None)
+        dataset = pd.read_csv(path, delimiter=',')
         dataset = dataset.sample(frac=1, random_state=42).reset_index(drop=True)
         x, y = dataset.iloc[:, :-1], dataset.iloc[:, -1]
         return x, y
