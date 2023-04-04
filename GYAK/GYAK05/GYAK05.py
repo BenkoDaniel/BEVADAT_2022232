@@ -51,7 +51,7 @@ class KNNClassifier:
         for x_test_element in x_test:
             distances = self.euclidean(x_test_element)
             distances = np.array(sorted(zip(distances, self.y_train)))
-            label_pred = mode(distances[:self.k, 1], keepdims=False).mode
+            label_pred = np.mode(distances[:self.k, 1], keepdims=False)
             labels_pred.append(label_pred)
         self.y_preds = np.array(labels_pred, dtype=np.int32)
 
