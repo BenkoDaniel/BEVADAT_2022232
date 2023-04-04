@@ -65,7 +65,8 @@ class KNNClassifier:
             self.k = i
             self.predict(self.x_test)
             ac_list.append(tuple((i, round(self.accuracy(), 2))))
-        return max(ac_list)
+        best_k, best_acc = max(ac_list, key=lambda x: x[1])
+        return best_k, best_acc
 
 '''
 classifier = KNNClassifier(2, 0.15)
