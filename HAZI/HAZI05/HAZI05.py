@@ -63,6 +63,7 @@ class KNNClassifier:
         ac_list = []
         for i in range(1, 21):
             self.k = i
+            self.predict(self.x_test)
             ac_list.append(tuple((i, round(self.accuracy(), 2))))
         return max(ac_list)
 
