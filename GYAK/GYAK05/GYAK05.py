@@ -3,7 +3,6 @@ from typing import Tuple
 from scipy.stats import mode
 
 from sklearn.metrics import confusion_matrix
-import seaborn as sns
 
 #property elnevezes: k_neighbors
 
@@ -51,7 +50,7 @@ class KNNClassifier:
         for x_test_element in x_test:
             distances = self.euclidean(x_test_element)
             distances = np.array(sorted(zip(distances, self.y_train)))
-            label_pred = np.mode(distances[:self.k, 1], keepdims=False)
+            label_pred = mode(distances[:self.k, 1], keepdims=False)
             labels_pred.append(label_pred)
         self.y_preds = np.array(labels_pred, dtype=np.int32)
 
