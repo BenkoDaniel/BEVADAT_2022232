@@ -1,9 +1,10 @@
 import pandas as pd
 class NJCleaner:
 
+    data: pd.DataFrame
+
     def __int__(self, path: str):
         self.data = pd.read_csv(path)
-
 
     def order_by_scheduled_time(self):
         return self.data.sort_values(by=['scheduled_time'], ascending=True)
@@ -12,7 +13,6 @@ class NJCleaner:
         labels = ['from', 'to']
         self.data = self.data.drop(labels=labels)
         return self.data.dropna()
-
 
     def convert_date_to_day(self):
         self.data['day'] = self.data['date'].strftime()
@@ -46,18 +46,18 @@ class NJCleaner:
         labels = ['train_id', 'scheduled_time', 'actual_time', 'delay_minutes']
         return self.data.drop(labels=labels)
 
-    def save_first_60k(self, save_path):
+    def save_first_60k(self, path):
         new_df = self.data[:60000]
-        new_df.to_csv(save_path)
+        new_df.to_csv(path)
 
-    def prep_df(self, save_path='data/NJ.csv'):
+    def prep_df(self, path='data/NJ.csv'):
         self.data = self.order_by_scheduled_time()
         self.data = self.drop_columns_and_nan()
         self.data = self.convert_date_to_day()
         self.data = self.convert_scheduled_time_to_part_of_the_day()
         self.data = self.convert_delay()
         self.data = self.drop_unnecessary_columns()
-        self.save_first_60k(save_path)
+        self.save_first_60k(path)
 
 
 
