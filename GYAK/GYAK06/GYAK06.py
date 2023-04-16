@@ -140,7 +140,7 @@ class DecisionTreeClassifier():
         else:
             return self.make_prediction(x, tree.right)
 
-
+'''
 col_name = ['sepal_lenght', 'sepal_width', 'petal_length', 'petal_width', 'type']
 data = pd.read_csv("data/Iris.csv",skiprows=1, header=None, names=col_name)
 
@@ -154,3 +154,4 @@ classifier.fit(X_train, Y_train)
 
 Y_pred = classifier.predict(X_test)
 print(accuracy_score(Y_test, Y_pred))
+'''
