@@ -37,7 +37,7 @@ class NJCleaner:
 
         new_df = self.data.copy()
         new_df['part_of_the_day'] = new_df['scheduled_time'].apply(part_of_the_day)
-        new_df.drop('scheduled_time', axis=1)
+        new_df = new_df.drop('scheduled_time', axis=1)
         return new_df
 
     def convert_delay(self) -> pd.DataFrame:
@@ -45,11 +45,12 @@ class NJCleaner:
         return self.data
 
     def drop_unnecessary_columns(self) -> pd.DataFrame:
-        return self.data.drop(['train_id', 'actual_time', 'delay_minutes'], axis=1)
+        self.data= self.data.drop(['train_id', 'actual_time', 'delay_minutes'], axis=1)
+        return self.data
 
-    def save_first_60k(self, path):
-        new_df = self.data[:60000]
-        new_df.to_csv(path)
+    def save_first_60k(self, path) -> pd.DataFrame:
+        self.data[:60000].to_csv(path, index=False)
+        return self.data
 
     def prep_df(self, path='data/NJ.csv'):
         self.data = self.order_by_scheduled_time()
@@ -58,6 +59,7 @@ class NJCleaner:
         self.data = self.convert_scheduled_time_to_part_of_the_day()
         self.data = self.convert_delay()
         self.data = self.drop_unnecessary_columns()
+
         self.save_first_60k(path)
 
 
