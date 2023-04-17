@@ -19,7 +19,7 @@ X = data.iloc[:, :-1].values
 Y = data.iloc[:, -1].values.reshape(-1, 1)
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=.2, random_state=41)
 
-dtclassifier = DecisionTreeClassifier(min_samples_split=2, max_depth=1)
+dtclassifier = DecisionTreeClassifier(min_samples_split=2, max_depth=4)
 dtclassifier.fit(x_train, y_train)
 
 y_pred = dtclassifier.predict(x_test)
