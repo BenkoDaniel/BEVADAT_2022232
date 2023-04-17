@@ -23,7 +23,7 @@ class NJCleaner:
         def part_of_the_day(dt):
             x = int(dt.split(' ')[1].split(':')[0])
             if 0 <= x <= 3:
-                return 'late night'
+                return 'late_night'
             if 4 <= int(x) <= 7:
                 return 'early_morning'
             if 8 <= int(x) <= 11:
