@@ -8,10 +8,10 @@ from GYAK.GYAK06.GYAK06 import DecisionTreeClassifier
 default_csv_path = 'data/2018_03.csv'
 processed_csv_path = 'data/NJ.csv'
 
-'''
+
 cleaner = NJCleaner(default_csv_path)
 cleaner.prep_df(processed_csv_path)
-'''
+
 
 data = pd.read_csv(processed_csv_path)
 
