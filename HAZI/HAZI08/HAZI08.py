@@ -110,7 +110,7 @@ return type: sklearn.linear_model._base.LinearRegression
 függvény neve: train_linear_regression
 '''
 
-def train_linear_regression(X_train, y_train) -> sklearn.linear_model._base.LinearRegression:
+def train_linear_regression(X_train, y_train): #-> sklearn.linear_model._base.LinearRegression:
   model = LinearRegression()
   model.fit(X_train, y_train)
   return model
@@ -210,8 +210,8 @@ return type: float
 függvény neve: evaluate_model
 '''
 
-def evaluate_model(y_test, y_pred) -> float:
-  return np.mean((y_pred - y_test)**2)
+def evaluate_model(y_test, y_pred): #-> float:
+  return mean_squared_error(y_test, y_pred)
 
 '''
 X, y = logistic_train_data(load_iris_data())
