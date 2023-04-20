@@ -30,25 +30,13 @@ class LinearRegression:
             self.m = self.m - self.lr * D_m  # Update m
             self.c = self.c - self.lr * D_c  # Update c
 
-            '''
-            if i % 100 == 0:
-                print(np.mean(y - y_pred))
-            '''
+
 
     def predict(self, X):
-        preds: np.ndarray
-        for x in X:
-            y_pred = self.m * x + self.c
-            preds.append(y_pred)
+        preds = self.m * X + self.c
         return preds
 
-    def evaluate(self, y):
-        # Calculate the Mean Absolue Error
-        preds = self.predict(y)
-        mae = np.mean(np.abs(preds - y))
-
-        # Calculate the Mean Squared Error
-        mse = np.mean((preds - y) ** 2)
-
-        return (mae, mse)
+    def evaluate(self, X, y):
+        mse = np.mean((self.predict(X) - y) ** 2)
+        return mse
 
