@@ -20,8 +20,10 @@ függvény neve: load_iris_data
 def load_iris_data() -> sklearn.utils.Bunch:
   return load_iris()
 
-iris = data=load_iris_data()
 
+'''
+iris = load_iris_data()
+'''
 
 
 '''
