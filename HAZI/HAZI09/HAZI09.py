@@ -38,10 +38,7 @@ class KMeansOnDigits:
 
     def predict(self):
         model = KMeans(n_clusters=self.n_clusters, random_state=self.random_state)
-        y = self.digits['target']
-        X = self.digits.drop(['target'], axis=1)
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=self.random_state)
-        self.clusters = model.fit_predict(X_train, y_train)
+        self.clusters = model.fit_predict(self.digits.data)
 
     # Készíts egy függvényt ami visszaadja a predictált cluster osztályokat
     # NOTE: amit a predict-ből visszakaptunk "clusters" azok lesznek a predictált cluster osztályok
@@ -58,12 +55,12 @@ class KMeansOnDigits:
     # Függvény neve: get_labels(clusters:np.ndarray, digits)
     # Függvény visszatérési értéke: labels:np.ndarray
 
-    def get_labels(self, clusters: np.ndarray, digits):
+    def get_labels(self):
         result = []
-        for i in clusters:
-            mask = pd.Series(i).mask()
-            mod = mode(digits['target'][mask])
-            result[mask == True] = mod
+        for i in self.clusters:
+            mask = (self.clusters == i)
+            mod = mode(self.digits.target[mask])[0][0]
+            result[mask] = mod
         self.labels = result
 
     # Készíts egy függvényt ami kiszámolja a model accuracy-jét
