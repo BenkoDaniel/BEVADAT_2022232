@@ -2,10 +2,8 @@
 import seaborn as sns
 sns.set()
 import numpy as np
-import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
 from scipy.stats import mode
 from sklearn.metrics import confusion_matrix as conf_matrix
 from sklearn.datasets import load_digits as load_d
