@@ -54,8 +54,8 @@ class KMeansOnDigits:
     # Függvény visszatérési értéke: labels:np.ndarray
 
     def get_labels(self):
-        result = []
-        for i in self.clusters:
+        result = np.zeros(len(self.clusters))
+        for i in range(len(self.clusters)):
             mask = (self.clusters == i)
             mod = mode(self.digits.target[mask])[0][0]
             result[mask] = mod
@@ -66,9 +66,9 @@ class KMeansOnDigits:
     # Függvény visszatérési értéke: accuracy:float
     # NOTE: Kerekítsd 2 tizedes jegyre az accuracy-t
 
-    def calc_accuracy(self, target_labels: np.ndarray, predicted_labels: np.ndarray):
-        self.accuracy = np.round(accuracy_score(target_labels, predicted_labels), decimals=2)
+    def calc_accuracy(self):
+        self.accuracy = np.round(accuracy_score(self.digits.target, self.clusters, decimals=2))
 
     # Készíts egy confusion mátrixot és plot-old seaborn segítségével
-    def confusion_matrix(self, target_labels: np.ndarray, predicted_labels: np.ndarray):
-        self.mat = conf_matrix(target_labels, predicted_labels)
+    def confusion_matrix(self):
+        self.mat = conf_matrix(self.digits.target, self.clusters)
