@@ -55,7 +55,7 @@ class KMeansOnDigits:
 
     def get_labels(self):
         result = np.zeros(len(self.clusters))
-        for i in range(len(self.clusters)):
+        for i in range(10):
             mask = (self.clusters == i)
             mod = mode(self.digits.target[mask])[0][0]
             result[mask] = mod
@@ -67,7 +67,7 @@ class KMeansOnDigits:
     # NOTE: Kerekítsd 2 tizedes jegyre az accuracy-t
 
     def calc_accuracy(self):
-        self.accuracy = np.round(accuracy_score(self.digits.target, self.clusters, decimals=2))
+        self.accuracy = np.round(accuracy_score(self.digits.target, self.clusters), decimals=2)
 
     # Készíts egy confusion mátrixot és plot-old seaborn segítségével
     def confusion_matrix(self):
