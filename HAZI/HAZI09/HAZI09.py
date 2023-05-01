@@ -67,8 +67,8 @@ class KMeansOnDigits:
     # NOTE: Kerekítsd 2 tizedes jegyre az accuracy-t
 
     def calc_accuracy(self):
-        self.accuracy = np.round(accuracy_score(self.digits.target, self.clusters), decimals=2)
+        self.accuracy = round(accuracy_score(self.digits.target, self.labels), 2)
 
     # Készíts egy confusion mátrixot és plot-old seaborn segítségével
     def confusion_matrix(self):
-        self.mat = conf_matrix(self.digits.target, self.clusters)
+        self.mat = conf_matrix(self.digits.target, self.labels)
