@@ -9,11 +9,12 @@ Egy példa a kimenetre: train_images, train_labels, test_images, test_labels
 függvény neve: mnist_digit_data
 '''
 
+
 def mnist_digit_data():
-  (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
+  train_images, train_labels, test_images, test_labels = tf.keras.datasets.mnist.load_data()
   train_images = train_images.astype('float32') / 255
   test_images = test_images.astype('float32') / 255
-  return (train_images, train_labels), (test_images, test_labels)
+  return train_images, train_labels, test_images, test_labels
 
 
 '''
