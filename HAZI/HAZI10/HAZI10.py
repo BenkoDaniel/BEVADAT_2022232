@@ -11,10 +11,10 @@ függvény neve: mnist_digit_data
 
 
 def mnist_digit_data():
-  train_images, train_labels, test_images, test_labels = tf.keras.datasets.mnist.load_data()
-  train_images = train_images.astype('float32') / 255
-  test_images = test_images.astype('float32') / 255
-  return train_images, train_labels, test_images, test_labels
+    (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
+    train_images = train_images.astype('float32') / 255
+    test_images = test_images.astype('float32') / 255
+    return train_images, train_labels, test_images, test_labels
 
 
 '''
@@ -27,6 +27,7 @@ Egy példa a kimenetre: model,
 return type: keras.engine.sequential.Sequential
 függvény neve: mnist_model
 '''
+
 
 def mnist_model():
   model = tf.keras.Sequential([
