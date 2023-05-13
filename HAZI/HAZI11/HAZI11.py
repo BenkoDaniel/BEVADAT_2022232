@@ -13,8 +13,8 @@ függvény neve: cifar100_data
 
 def cifar100_data():
   (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar100.load_data()
-  x_train = x_train / 255.0
-  y_train = y_train / 255.0
+  x_train = x_train.astype('float32') / 255
+  y_train = y_train.astype('float32') / 255
   return x_train, y_train, x_test, y_test
 
 
